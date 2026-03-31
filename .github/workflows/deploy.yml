@@ -5,6 +5,10 @@ on:
   push:
     branches: ["main"]
 
+# --- ESTA ES LA LÍNEA MÁGICA PARA ELIMINAR LA ADVERTENCIA ---
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 # Permisos de seguridad para que GitHub pueda publicar en Pages
 permissions:
   contents: read
@@ -13,7 +17,6 @@ permissions:
 
 jobs:
   build-and-deploy:
-    # ESTA ES LA LÍNEA NUEVA QUE EXIGE GITHUB PARA DAR PERMISO
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
