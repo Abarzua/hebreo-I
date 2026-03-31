@@ -13,6 +13,10 @@ permissions:
 
 jobs:
   build-and-deploy:
+    # ESTA ES LA LÍNEA NUEVA QUE EXIGE GITHUB PARA DAR PERMISO
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: 1. Leer el código del repositorio
