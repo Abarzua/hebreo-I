@@ -25,7 +25,7 @@ jobs:
       - name: 2. Preparar el entorno (Computadora virtual)
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: 3. Instalar librerías (Lucide, Tailwind, React)
         run: npm install
