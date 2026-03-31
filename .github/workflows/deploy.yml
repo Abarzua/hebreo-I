@@ -1,0 +1,39 @@
+name: Compilar y Desplegar Portafolio
+
+# Esto le dice a GitHub que ejecute este guion cada vez que subas algo a la rama 'main'
+on:
+  push:
+    branches: ["main"]
+
+# Permisos de seguridad para que GitHub pueda publicar en Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Leer el código del repositorio
+        uses: actions/checkout@v4
+
+      - name: 2. Preparar el entorno (Computadora virtual)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 3. Instalar librerías (Lucide, Tailwind, React)
+        run: npm install
+
+      - name: 4. COMPILAR (Crear la carpeta oculta dist)
+        run: npm run build
+
+      - name: 5. Preparar los archivos compilados
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: 6. Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
